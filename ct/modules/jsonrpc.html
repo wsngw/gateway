@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title> JsonRPC Javascript test HTML </title> 
+<meta name="generator" content="editplus" /> 
+<meta name="author" content="www.wsn.cn" /> 
+<meta name="keywords" content="" /> 
+<meta name="description" content="" /> 
+</head> 
+
+<body> 
+<h1>IOT Gateway RPC remote monitor </h1>
+<table > 
+<tr><td id="a"></td></tr>   
+<tr><td id="b"></td></tr>   
+<tr><td id="c"></td></tr>   
+<tr><td id="d"></td></tr> 
+</table> 
+
+ <table id="tab" width="60%"  border="1">  
+         <tbody id="tbody">  
+             <tr>  
+                 <td align="right" colspan="2">  
+                 <input type="button" value="添加" onclick="add()" />  
+                 <input type="button" value="删除" onclick="del()" />  
+                 </td>  
+             </tr>  
+             <tr align="center" >  
+                 <td>属性名</td>  
+                 <td>状态值</td>  
+             </tr>  
+             <tr>  
+                 <td>GW model</td>  
+                 <td>IOT_rev1</td>  
+             </tr>  
+         </tbody>  
+  </table>  
+
+<img src="images/shicha.png"  />
+
+<script type="text/javascript"> 
+<!--  
+//1.只有一个数组  
+  var data='{"a":"data1","b":"data2","c":"data3","d":"data4"}';  
+  var jsonData = eval("("+data+")");  
+  for(var key in jsonData){  
+  //   alert(key+':'+jsonData[key]);  
+     if(document.getElementById(key)){  
+           document.getElementById(key).innerHTML=jsonData[key];  
+        }  
+    }  
+
+   //2.有两个或者以上的数组  
+/*
+    data='[{"a":"data1","b":"data2"},{"aa":"内容3","bb":"内容 4"}]';  
+    jsonData = eval("("+data+")");  
+    for(var i=0;i<jsonData.length;i++){  
+       for(var key in jsonData[i]){  
+           alert(key+':'+jsonData[i][key]);  
+        }  
+    } 
+*/    
+
+var jsonString =null;
+
+function handler() {
+if(this.readyState == 4 && this.status == 200) {
+  jsonString = this.responseText;
+  alert(jsonString);
+ }
+// else
+//  jsonString = "{\"response\":\"Unknow HTTP response data\"}";
+
+}
+/*
+var client = new XMLHttpRequest();
+client.onreadystatechange = handler;
+client.open("GET", "unicorn.xml");
+client.send();
+*/
+
+function getjsonString() {
+var mesg="rpc_request={\"method\": \"gw.rpc.getall\", \"params\": []}";
+ var client = new XMLHttpRequest();
+client.onreadystatechange = handler;
+ client.open("POST", "/home/makui/projects/log");
+ //client.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+ client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+ client.send(mesg);
+}
+
+function add(){  
+       
+     var table = document.getElementById("tbody");  
+   
+     var tr = document.createElement("tr");  
+       
+     table.appendChild(tr);  
+       
+     var td1 = document.createElement("td");  
+      
+    var td2 = document.createElement("td");  
+      
+     tr.appendChild(td1);  
+       
+     tr.appendChild(td2);  
+       
+     var text =  document.createElement("input");  
+     text.type = "text";  
+     text.name = "name";  
+    td1.appendChild(text);  
+       
+     var sel = document.createElement("select");  
+     sel.name = "state"  
+     td2.appendChild(sel);  
+       
+     sel.options.add(new Option("预占","0"));  
+     sel.options.add(new Option("空闲","1"));  
+ }  
+
+ function del(){  
+     var trs = document.getElementsByTagName("tr");  
+       
+    var tbody = document.getElementById("tbody");  
+    tbody.removeChild(trs[trs.length - 1]);  
+ } 
+
+  --> 
+  </script> 
+  <p> What's your name, Sir?<br>
+  <form action="/namepost" method="post">
+  <input name="name" type="text">
+  <input type="submit" value=" Send ">
+ </form>
+<input type="button" onclick="getjsonString()" value="POST a mesg to server" />
+ </body> 
+</html> 
+
+

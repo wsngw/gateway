@@ -1,0 +1,2 @@
+/home/wsn/git/gateway/ct/build/CMakeFiles/gw.dir
+/home/wsn/git/gateway/ct/build/CMakeFiles/wsngw.dir

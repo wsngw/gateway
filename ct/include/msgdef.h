@@ -1,0 +1,50 @@
+/*
+ * msgdef.h
+ *
+ *  Created on: 2010-11-8
+ *      Author: makui
+ *   Copyright: 2010, WSN
+ */
+
+#ifndef __MSGDEF_H
+#define __MSGDEF_H
+
+#define MAKE_MSG(class, type) \
+	((class) << 16 | (type))
+
+#define GW_MSG_CLASS_SYSTEM		1
+
+#define GW_MSG_SYSTEM_QUIT		MAKE_MSG(GW_MSG_CLASS_SYSTEM, 8)
+
+
+#define GW_DATAINIT_SERVICE  4
+#define GW_MAN_SVC 		0x0010
+#define SN_DM_SVC 		0x1012
+#define SN_DATA_SVC 	0x1013
+#define PLAT_DM_SVC 	0x2014
+#define PLAT_DATA_SVC 	0x2015
+#define DEV_MAN_SVC 	0x0011
+#define GW_LOCATE_APP	0x0012
+
+
+//#define APP_ID	0x0001
+//#define SP_ID	0x0001
+
+#define DEVICE_LOGIN_REQUEST		0x0001
+#define DEVICE_LOGIN_RESPONSE		0x8001
+#define DEVICE_LOGOUT_REQUEST		0x0002
+#define DEVICE_LOGOUT_RESPONSE		0x8002
+#define DEVICE_UPDATE_REQUEST		0x0003
+//#define DEVICE_UPDATE_RESPONSE		0x8003
+
+#define UPSTREAM_DATA				0x0004
+#define UPSTREAM_DATA_ACK			0x8004
+#define DOWNSTREAM_DATA				0x0005
+#define DOWNSTREAM_DATA_ACK			0x8005
+
+#define ACTIVE_CONFIG_REQUEST		0x0006
+#define ACTIVE_CONFIG_RESPONSE		0x8006
+#define PASSIVE_CONFIG_REQUEST		0x0007
+#define PASSIVE_CONFIG_RESPONSE		0x8007
+
+#endif /* __MSGDEF_H */

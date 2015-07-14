@@ -1,0 +1,1 @@
+/usr/bin/gcc   -DGW_DEBUG -fmessage-length=0 -g    CMakeFiles/gw.dir/src/platform/linux/gw.c.o  -o ../bin/i386-Linux/gw -rdynamic ../bin/i386-Linux/libwsngw.so -ldl -lpthread -lm -lrt -Wl,-rpath,/home/wsn/git/gateway/ct/bin/i386-Linux 
